@@ -1,6 +1,9 @@
-Crawler/.idea/*
 go/*
 Java/*
 MySQL/*
-Python/.idea/*
 PyTorch/*
+
+Crawler/.idea/*
+Python/.idea/*
+Python/__pycache__/*
+Python/jupyter/*
