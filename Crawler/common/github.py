@@ -12,7 +12,7 @@ class Github:
 
     @staticmethod
     def get_authenticity_token(html):
-        return re.findall('<input type="hidden" name="authenticity_token" value="(.*?)" />', html, re.S)[0]
+        return re.findall('<input type="hidden" name="authenticity_token" value="(.*?)"', html, re.S)[0]
 
     @staticmethod
     def get_timestamp(html):
@@ -45,14 +45,15 @@ class Github:
             'timestamp': timestamp,
             'timestamp_secret': timestamp_secret,
         }
-        self.session.post('https://github.com/session', data=data)
+        return self.session.post('https://github.com/session', data=data).status_code == 200
 
     def follow_user(self, username):
-        follow_url = f"https://github.com/{username}/"
+        follow_url = f"https://github.com/{username}"
         response = self.session.get(follow_url)
 
         html = response.text
         follow_auth_token = Github.get_authenticity_token(html)
+        print(follow_auth_token)
 
         follow_data = {
             "commit": "Follow",
