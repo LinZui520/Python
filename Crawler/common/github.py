@@ -46,7 +46,6 @@ class Github:
             'timestamp_secret': timestamp_secret,
         }
         self.session.post('https://github.com/session', data=data)
-        # return self.session.get('https://github.com/login')
 
     def follow_user(self, username):
         follow_url = f"https://github.com/{username}/"
