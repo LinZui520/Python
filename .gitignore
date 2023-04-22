@@ -1,7 +1,3 @@
 go/*
 MySQL/*
 PyTorch/*
-
-Python/.idea/*
-Python/__pycache__/*
-Python/jupyter/*
