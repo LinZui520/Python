@@ -6,6 +6,7 @@ class Github:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers = {
+            "referer": "https: // github.com /",
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.48"
         }
@@ -45,7 +46,7 @@ class Github:
             'timestamp': timestamp,
             'timestamp_secret': timestamp_secret,
         }
-        return self.session.post('https://github.com/session', data=data).status_code == 200
+        return self.session.post('https://github.com/session', data=data)
 
     def follow_user(self, username):
         follow_url = f"https://github.com/{username}"
@@ -53,7 +54,6 @@ class Github:
 
         html = response.text
         follow_auth_token = Github.get_authenticity_token(html)
-        print(follow_auth_token)
 
         follow_data = {
             "commit": "Follow",
@@ -70,6 +70,6 @@ class Github:
 
 if __name__ == "__main__":
     github = Github()
-    github.login('', '')
+    print(github.login('', '').status_code)
     result = github.follow_user('cpt1225')
     print(result)
