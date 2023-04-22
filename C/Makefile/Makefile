@@ -1,6 +1,6 @@
 # 链接 .o + .o -> main
 main : hello.o main.o
-	gcc hello.o main.o -o main
+	gcc -lm hello.o main.o -o main
 
 # 预处理 -E .cpp -> .i
 hello.i : hello.c hello.h
