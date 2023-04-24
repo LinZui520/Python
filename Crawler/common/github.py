@@ -1,6 +1,6 @@
-import requests
 import re
-import time
+
+import requests
 
 
 class Github:
@@ -48,68 +48,9 @@ class Github:
             'timestamp_secret': timestamp_secret,
         }
 
-        response = self.session.post('https://github.com/session', data=data)
-
-        if response.status_code == 200:
-            return True
-        else:
-            return False
-
-    def follow_user(self, username):
-
-        url = f"https://github.com/{username}"
-
-        response = self.session.get(url)
-
-        html = response.text
-
-        follow_auth_token = Github.get_authenticity_token(html)
-
-        follow_data = {
-            "commit": "Follow",
-            "authenticity_token": follow_auth_token,
-        }
-
-        follow_response = self.session.post(
-            f"https://github.com/users/follow?target={username}",
-            data=follow_data,
-        )
-
-        if follow_response.status_code == 200:
-            return True
-        else:
-            return False
-
-    def unfollow_user(self, username):
-        url = f"https://github.com/{username}"
-
-        response = self.session.get(url)
-
-        html = response.text
-
-        unfollow_auth_token = Github.get_authenticity_token(html)
-
-        unfollow_data = {
-            "commit": "Unfollow",
-            "authenticity_token": unfollow_auth_token,
-        }
-
-        unfollow_response = self.session.post(
-            f"https://github.com/users/unfollow?target={username}",
-            data=unfollow_data,
-        )
-
-        if unfollow_response.status_code == 200:
-            return True
-        else:
-            return False
+        return self.session.post('https://github.com/session', data=data)
 
 
 if __name__ == "__main__":
     github = Github()
-    print(github.login('', ''))
-    result = github.unfollow_user('cpt1225')
-    if result:
-        print('User unfollowed successfully!')
-    else:
-        print('Failed to unfollow user.')
+    response = github.login('', '')
