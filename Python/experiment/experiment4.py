@@ -1,3 +1,4 @@
+# 实验报告三模板
 import random
 
 numb = []
