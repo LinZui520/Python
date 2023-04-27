@@ -10,6 +10,9 @@ class People:
     def speak(self):
         print('Hello, my name is {} and I am {} years old.'.format(self.name, self.age))
 
+    def __str__(self):
+        return 'People(name={}, age={})'.format(self.name, self.age)
+
 
 class Student(People):
 
@@ -21,11 +24,9 @@ class Student(People):
         print("Hello, my name is {} and I am a student in grade {}.".format(self.name, self.grade))
 
 
-jack = People('Jack', 19)
-jack.speak()
-
 alice = Student('Alice', 20, 2)
 alice.speak()
+print(alice)
 
 # 打开文件
 file = open("example.txt", "w")
