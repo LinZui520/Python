@@ -27,6 +27,9 @@ def main():
     x = np.linspace(0, 1, 100)
     noise = np.random.normal(0, 0.015, x.shape)
     y = (x - 1.1) * (x + 0.1) + 0.5 + noise
+    # 绘制散点图
+    plt.scatter(x, y)
+    plt.show()
     # 将x,y转换为矩阵形式
     x = x.reshape(-1, 1)
     y = y.reshape(-1, 1)
