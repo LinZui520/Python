@@ -35,7 +35,6 @@ def main():
     # 将x,y转换为张量形式tensor
     x = torch.tensor(x, dtype=torch.float32)
     y = torch.tensor(y, dtype=torch.float32)
-
     inputs = Variable(x)
     target = Variable(y)
     # 定义模型
