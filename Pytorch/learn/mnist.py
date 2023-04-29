@@ -25,14 +25,8 @@ def train(train_loader, model, criterion, optimizer):
         inputs, labels = data
         # 获得模型预测结果
         out = model(inputs)
-        labels = labels.reshape(-1, 1)
-        # tensor.scatter(dim, index, src)
-        # dim:对哪个维度进行独热编码
-        # index:要将src中对应的值放到tensor的哪个位置
-        # src:插入index的数值
-        one_hot = torch.zeros(inputs.shape[0], 10).scatter(1, labels, 1)
         # 计算loss
-        loss = criterion(out, one_hot)
+        loss = criterion(out, labels)
         # 梯度清零
         optimizer.zero_grad()
         # 计算梯度
@@ -83,7 +77,7 @@ def main():
     # 定义模型
     model = Net()
     # 定义代价函数
-    criterion = nn.MSELoss()
+    criterion = nn.CrossEntropyLoss()
     # 定义优化器
     optimizer = optim.SGD(model.parameters(), lr=0.5)
 

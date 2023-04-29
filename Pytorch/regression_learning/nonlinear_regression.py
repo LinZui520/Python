@@ -45,7 +45,7 @@ def main():
     # 定义优化器
     optimizer = optim.SGD(model.parameters(), lr=0.3)
     # 训练模型
-    for i in range(20000):
+    for i in range(10000):
         # 前向传播
         out = model(inputs)
         # 计算损失
