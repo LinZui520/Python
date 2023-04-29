@@ -25,7 +25,7 @@ class Net(nn.Module):
         return x
 
 
-def train(train_loader, model, criterion, optimizer):
+def train():
     model.train()
     for i, data in enumerate(train_loader):
         # 获得一个批次的数据和标签
@@ -42,7 +42,7 @@ def train(train_loader, model, criterion, optimizer):
         optimizer.step()
 
 
-def test(test_loader, train_loader, model):
+def test():
     model.eval()
     correct = 0
     for i, data in enumerate(test_loader):
@@ -69,43 +69,38 @@ def test(test_loader, train_loader, model):
     print('Train acc:{0}'.format(correct / len(train_loader)))
 
 
-def main():
-    # 训练集
-    train_dataset = datasets.MNIST(root='./',
-                                   train=True,
-                                   transform=transforms.ToTensor(),
-                                   download=True)
+# 训练集
+train_dataset = datasets.MNIST(root='./',
+                               train=True,
+                               transform=transforms.ToTensor(),
+                               download=True)
 
-    # 测试集
-    test_dataset = datasets.MNIST(root='./',
-                                  train=False,
-                                  transform=transforms.ToTensor(),
-                                  download=True)
+# 测试集
+test_dataset = datasets.MNIST(root='./',
+                              train=False,
+                              transform=transforms.ToTensor(),
+                              download=True)
 
-    # 批次大小
-    batch_size = 64
+# 批次大小
+batch_size = 64
 
-    # 装载训练集
-    train_loader = DataLoader(dataset=train_dataset,
-                              batch_size=batch_size,
-                              shuffle=True)
-    # 装载测试集
-    test_loader = DataLoader(dataset=test_dataset,
-                             batch_size=batch_size,
-                             shuffle=True)
+# 装载训练集
+train_loader = DataLoader(dataset=train_dataset,
+                          batch_size=batch_size,
+                          shuffle=True)
+# 装载测试集
+test_loader = DataLoader(dataset=test_dataset,
+                         batch_size=batch_size,
+                         shuffle=True)
 
-    # 定义模型
-    model = Net()
-    # 定义代价函数
-    criterion = nn.CrossEntropyLoss()
-    # 定义优化器
-    optimizer = optim.Adam(model.parameters(), lr=0.0003)
+# 定义模型
+model = Net()
+# 定义代价函数
+criterion = nn.CrossEntropyLoss()
+# 定义优化器
+optimizer = optim.Adam(model.parameters(), lr=0.0003)
 
-    for epoch in range(20):
-        print('epoch:', epoch)
-        train(train_loader, model, criterion, optimizer)
-        test(test_loader, train_loader, model)
-
-
-if __name__ == '__main__':
-    main()
+for epoch in range(20):
+    print('epoch:', epoch)
+    train()
+    test()
