@@ -54,7 +54,7 @@ def test():
         _, predicted = torch.max(out, 1)
         # 预测正确的数量
         correct += sum((predicted == labels)[:])
-    print('Test acc:{0}'.format(correct / len(test_loader)))
+    print('Test acc:{0}'.format(correct / len(test_dataset)))
 
     correct = 0
     for i, data in enumerate(train_loader):
@@ -66,7 +66,7 @@ def test():
         _, predicted = torch.max(out, 1)
         # 预测正确的数量
         correct += sum((predicted == labels)[:])
-    print('Train acc:{0}'.format(correct / len(train_loader)))
+    print('Train acc:{0}'.format(correct / len(train_dataset)))
 
 
 # 训练集
@@ -100,7 +100,7 @@ criterion = nn.CrossEntropyLoss()
 # 定义优化器
 optimizer = optim.Adam(model.parameters(), lr=0.0003)
 
-for epoch in range(20):
+for epoch in range(1, 21):
     print('epoch:', epoch)
     train()
     test()
