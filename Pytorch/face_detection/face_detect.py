@@ -1,6 +1,6 @@
 import cv2
 
-face_cascade = cv2.CascadeClassifier('RecognitionModel.xml')
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 stream = cv2.VideoCapture(0)
 
@@ -9,13 +9,10 @@ while True:
     frame = cv2.flip(frame, 180)
     faces = face_cascade.detectMultiScale(frame, scaleFactor=1.5, minNeighbors=5)
     for (x, y, w, h) in faces:
-        width = x + w
-        height = y + h
-        color = (255, 0, 0)
-        cv2.rectangle(frame, (x, y), (width, height), color, 2)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
     cv2.imshow('face_detect', frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) == 27:
         break
 
 stream.release()
