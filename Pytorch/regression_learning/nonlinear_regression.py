@@ -11,9 +11,9 @@ class NonlinearRegression(nn.Module):
         # 调用父类的初始化函数
         super(NonlinearRegression, self).__init__()
         # 定义一个连接层1 -> 10 -> 1
-        self.linear1 = nn.Linear(1, 10)
+        self.linear1 = nn.Linear(1, 5)
         self.tanh = nn.Tanh()
-        self.linear2 = nn.Linear(10, 1)
+        self.linear2 = nn.Linear(5, 1)
 
     def forward(self, x):
         x = self.linear1(x)
